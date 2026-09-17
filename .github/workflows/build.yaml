@@ -23,7 +23,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install pip
+        shell: pwsh
         run: |
+          uv sync
+          .\.venv\Scripts\Activate.ps1
           uv pip install pip
 
       - name: Checkout torch
@@ -40,7 +43,6 @@ jobs:
       - name: build
         shell: powershell
         run: |
-          uv sync
           .\.venv\Scripts\Activate.ps1
           python setup.py develop
       - name: Upload torch build
