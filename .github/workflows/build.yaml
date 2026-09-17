@@ -36,10 +36,11 @@ jobs:
               -property installationPath
         
             Write-Host "VS: $vsPath"
-        
+  
             & "$vsPath\Common7\Tools\Launch-VsDevShell.ps1" -Arch amd64
             cl
-          
+            ninja --version
+            where.exe ninja        
       - name: Checkout torch
         uses: actions/checkout@v6
         with:
