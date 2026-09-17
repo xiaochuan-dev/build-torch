@@ -14,6 +14,10 @@ jobs:
       USE_CUDA: "0"
       USE_ROCM: "0"
     steps:
+      - name: Enable Git long paths
+        shell: pwsh
+        run: |
+          git config --global core.longpaths true
       - name: setup uv
         uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
         with:
