@@ -51,8 +51,17 @@ jobs:
       - name: build
         shell: pwsh
         run: |
-          Import-Module Microsoft.VisualStudio.DevShell.dll
-          Enter-VsDevShell -VsInstanceId (Get-VsSetupInstance | Select-Object -First 1 -ExpandProperty InstanceId) -DevCmdArguments "-arch=x64"
+          $vsPath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" `
+              -latest `
+              -products * `
+              -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 `
+              -property installationPath
+        
+          Write-Host "VS: $vsPath"
+        
+          & "$vsPath\Common7\Tools\Launch-VsDevShell.ps1" -Arch amd64
+
+          
           uv sync
           .\.venv\Scripts\Activate.ps1
           uv pip install pip
