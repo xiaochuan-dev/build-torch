@@ -65,6 +65,7 @@ jobs:
           uv sync
           .\.venv\Scripts\Activate.ps1
           uv pip install pip
+          uv pip install scikit-build-core
           python setup.py develop
       - name: Upload torch build
         uses: actions/upload-artifact@v7
