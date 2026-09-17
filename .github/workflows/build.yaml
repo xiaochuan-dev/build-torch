@@ -14,12 +14,12 @@ jobs:
       USE_CUDA: "0"
       USE_ROCM: "0"
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: setup uv
+        uses: astral-sh/setup-uv@10.1.0
         with:
-          python-version: "3.12.14"
+          python-version: "3.12"
 
-      - name: Checkout CPython
+      - name: Checkout torch
         uses: actions/checkout@v6
         with:
           repository: pytorch/pytorch
@@ -33,6 +33,9 @@ jobs:
       - name: build
         shell: powershell
         run: |
+          uv sync
+          .\.venv\Scripts\Activate.ps1
+          uv pip add -r requirements.txt
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py develop
