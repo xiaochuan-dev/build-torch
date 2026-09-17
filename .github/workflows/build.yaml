@@ -15,7 +15,7 @@ jobs:
       USE_ROCM: "0"
     steps:
       - name: setup uv
-        uses: astral-sh/setup-uv@10.1.0
+        uses: astral-sh/setup-uv@10
         with:
           python-version: "3.12"
 
