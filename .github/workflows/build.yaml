@@ -40,5 +40,9 @@ jobs:
           uv sync
           .\.venv\Scripts\Activate.ps1
           python setup.py develop
-          
+      - name: Upload torch build
+        uses: actions/upload-artifact@v7
+        with:
+          name: torch
+          path: build
       
